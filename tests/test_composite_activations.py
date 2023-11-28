@@ -1,4 +1,5 @@
 import unittest
+
 from novi.core.composite_and_activation import CompositeAndActivation
 from novi.core.models import Activation
 
@@ -45,6 +46,7 @@ class CompositeActivationTestCase(unittest.TestCase):
 
         cpa = CompositeAndActivation([dta, wr])
         self.assertEqual(cpa.evaluate(context), False)
+
 
 if __name__ == '__main__':
     unittest.main()

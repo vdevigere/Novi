@@ -1,11 +1,12 @@
 import logging
 import unittest
+
 import novi.core
 import novi_activations.activation1 as activation1
 import novi_activations.activation2 as activation2
-import novi_activations.sub_package.activation3 as activation3
-import novi_activations.standard.weighted_random_activation as wra
 import novi_activations.standard.date_time_activation as dta
+import novi_activations.standard.weighted_random_activation as wra
+import novi_activations.sub_package.activation3 as activation3
 
 logger = logging.getLogger(__name__)
 

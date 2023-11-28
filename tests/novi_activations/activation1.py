@@ -2,4 +2,5 @@ from novi.core import BaseActivation
 
 
 class Activation1(BaseActivation):
-    pass
+    def evaluate(self, context: dict = None) -> bool:
+        pass

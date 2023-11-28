@@ -1,9 +1,9 @@
 import logging
 import pkgutil
+from abc import ABC, abstractmethod
 from importlib import import_module
 from inspect import isclass
 from typing import Any
-from abc import ABC, abstractmethod
 
 import novi_activations
 
