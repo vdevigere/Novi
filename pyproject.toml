@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "okapi"
+version = "0.1.0"
+description = "A simple yet powerful feature flag and multivariate testing platform built in Python"
+authors = ["vdevigere <vdevigere+git@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+requests = "^2.31.0"
+Flask = "^3.0.0"
+SQLAlchemy = "^2.0.23"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
