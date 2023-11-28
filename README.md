@@ -1,4 +1,4 @@
-# novi
+# Novi
 ## Table of Contents
 
 1. [Concepts](#concepts)
@@ -7,7 +7,7 @@
   4. [Tables](#tables)
   5. [Activations (Implementation and Discovery)](#activations-implementation-and-discovery)
 
-novi is a simple yet powerful feature flag and multivariate testing platform built in Python. novi is "simple" because all of its core capabilities are built around 2 simple concepts. Flags and Activations
+Novi is a simple yet powerful feature flag and multivariate testing platform built in Python. Novi is "simple" because all of its core capabilities are built around 2 simple concepts. Flags and Activations
 
 
 ## Concepts
@@ -27,7 +27,7 @@ In the example below the banner_ad is turned on by default, while the 50% discou
 | 2  	| 50% discount 	| false  	|
 
 ### Activations
-**Activations** determine the status of the flag. Activations can turn a flag on or off when the activation conditions are met. Activations are what make novi a **_"dynamic"_** feature flag system. Some scenarios that Activations are useful:-
+**Activations** determine the status of the flag. Activations can turn a flag on or off when the activation conditions are met. Activations are what make novi a **_"dynamic"_** feature flag system, since the activations are evaluated at runtime and enable features to be turned on/off based on runtime scenarios. Some scenarios that Activations are useful:-
 - Features could be activated depending on the deployment environment such as production, development or test
 - Feature could be shown only to certain usernames and disabled for others.
 - Organizations may choose to show a feature to only traffic originating from company IP address ranges during testing
@@ -39,12 +39,13 @@ The list of scenarios can be infinitely varied and complex. An activation has fo
 - A python class name that is used to instantiate an activation object
 - A configuration
 
-Activation classes are discovered and registered with novi using a plugin pattern. Users are expected to provide a folder named "novi_activations" containing modules and packages with Activation classes. Out of the box novi comes with 2 activations:-
-- [A Weighted Random Activation]()
-- [A Date/Time based Activation]()
+Activation classes are discovered and registered with Novi using a [plugin pattern](https://packaging.python.org/en/latest/guides/creating-and-discovering-plugins/#using-namespace-packages). Users are expected to provide a folder named "novi_activations" containing modules and packages with Activation classes. An Activation class inherits from the Abstract base class [BaseActivation](src/novi/core/__init__.py).
+Out of the box novi comes with 2 activations:-
+- [A Weighted Random Activation](src/novi_activations/standard/weighted_random_activation.py)
+- [A Date/Time based Activation](src/novi_activations/standard/date_time_activation.py)
 
-Each activation object is passed a configuration at the time of instantiation. Configurations enable the business logic that drives activations. Think of configurations as a free-form column, containing strings (typically json) that can be parsed by the activation logic to build its internal configuration object.
-As an example if your activation turns on/off flags for certain users, you may want to provide a list of usernames in the config. The username of the signed-in user at the time of evaluation will be checked against this list of usernames. 
+Each activation object is passed a configuration at the time of instantiation. Configurations enable the business logic that drives activations. Think of configurations as a free-form column, containing strings (typically json) that can be parsed by the Activation class to build its internal configuration object.
+As an example if your activation turns on/off flags only if current date is between a start date and an end date, you would configure that as shown in the example below (id = 2)  
 
 | id 	 | name 	                          | class_name 	                                               | config   	                                                                                                         |
 |------|----------------------------------|--------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|
@@ -56,10 +57,10 @@ See [Creating Activations]() for details on how to create your own custom activa
 ## Architecture
 
 ### Tables
-novi captures the details of the above two concepts in just 3 tables: **flags**, **activations** and the association table **flags_activations**. 
+Novi captures the details of the above two concepts in just 3 tables: **flags**, **activations** and the association table **flags_activations**. 
 
 The tables can be created manually using [schema.sql](schema.sql) or automatically by setting
-`createTables=False` in [novi.ini](novi.ini)
+`createTables=True` in [novi.ini](novi.ini)
 
 ### Components
 
@@ -86,7 +87,7 @@ The web component implements a simple flask API server to implement two endpoint
 
 ### Implementating Activations
 
-novi scans a folder by name "novi_activations" on the python path and registers all classes inheriting from [BaseActivation](src/novi/core/__init__.py) found within this folder.
+Novi scans a folder by name "novi_activations" on the python path and registers all classes inheriting from [BaseActivation](src/novi/core/__init__.py) found within this folder.
 
 ```python
 class BaseActivation(object):
@@ -97,4 +98,5 @@ class BaseActivation(object):
     def evaluate(self, context: dict = None) -> bool:
         pass
 ```
-novi's power comes from being able to implement pretty much any complex logic within these activation classes. The final status of the flag is determined by ANDing each of the evaluated status
+Novi's power comes from being able to implement pretty much any complex logic within these activation classes. 
+A flag can be associated with multiple activations. The final status of the flag is determined by ANDing the status from evaluating each activation.
