@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "novi"
-version = "0.1.0"
+version = "0.2.0"
 description = "A simple yet powerful feature flag and multivariate testing platform built in Python"
 authors = ["vdevigere <vdevigere+git@gmail.com>"]
 readme = "README.md"
