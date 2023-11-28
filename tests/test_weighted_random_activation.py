@@ -1,6 +1,6 @@
 import logging
 import unittest
-from okapi_activations.standard.weighted_random_activation import WeightedRandomActivation
+from novi_activations.standard.weighted_random_activation import WeightedRandomActivation
 
 logger = logging.getLogger(__name__)
 

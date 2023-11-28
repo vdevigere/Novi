@@ -1,7 +1,7 @@
 import json
 import random
 
-from okapi.core import BaseActivation
+from novi.core import BaseActivation
 
 
 class WeightedRandomActivation(BaseActivation):

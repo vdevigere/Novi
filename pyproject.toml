@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "okapi"
+name = "novi"
 version = "0.1.0"
 description = "A simple yet powerful feature flag and multivariate testing platform built in Python"
 authors = ["vdevigere <vdevigere+git@gmail.com>"]

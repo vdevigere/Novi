@@ -2,9 +2,9 @@ import logging
 
 import requests
 
-from okapi.client import config
-from okapi.client.client_base import BaseClient
-from okapi.core.models import Flag, Activation
+from novi.client import config
+from novi.client.client_base import BaseClient
+from novi.core.models import Flag, Activation
 
 
 class RemoteClient(BaseClient):

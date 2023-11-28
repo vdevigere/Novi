@@ -2,8 +2,8 @@ import logging
 
 from sqlalchemy import create_engine
 
-from okapi.client import config
-from okapi.core.models import Base
+from novi.client import config
+from novi.core.models import Base
 
 url = config.get('database', 'url', fallback='sqlite://')
 echo = config.getboolean('database', 'echo', fallback=False)

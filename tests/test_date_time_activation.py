@@ -1,5 +1,5 @@
 import unittest
-from okapi_activations.standard.date_time_activation import DateTimeActivation
+from novi_activations.standard.date_time_activation import DateTimeActivation
 
 
 class DateTimeActivationTestCase(unittest.TestCase):

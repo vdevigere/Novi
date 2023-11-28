@@ -2,8 +2,8 @@ import dataclasses
 
 from flask import Blueprint
 
-from okapi.client.dbclient import DbClient
-from okapi.core.models import Flag
+from novi.client.dbclient import DbClient
+from novi.core.models import Flag
 
 blueprint = Blueprint("flags", __name__)
 

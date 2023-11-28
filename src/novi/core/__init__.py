@@ -5,7 +5,7 @@ from inspect import isclass
 from typing import Any
 from abc import ABC, abstractmethod
 
-import okapi_activations
+import novi_activations
 
 logging.getLogger(__name__).addHandler(logging.NullHandler())
 
@@ -45,4 +45,4 @@ def find_activations(ns_pkg) -> dict[str, type[BaseActivation]]:
     return found_activations
 
 
-discovered_activations: dict[str, type[BaseActivation]] = find_activations(okapi_activations)
+discovered_activations: dict[str, type[BaseActivation]] = find_activations(novi_activations)

@@ -1,19 +1,19 @@
 import unittest
-from okapi.core.composite_and_activation import CompositeAndActivation
-from okapi.core.models import Activation
+from novi.core.composite_and_activation import CompositeAndActivation
+from novi.core.models import Activation
 
 
 class CompositeActivationTestCase(unittest.TestCase):
     def test_allTrue(self):
         dta = Activation(id=1, name="date-time",
-                         class_name="okapi_activations.standard.date_time_activation.DateTimeActivation",
+                         class_name="novi_activations.standard.date_time_activation.DateTimeActivation",
                          config='''{
                 "startDateTime":"11/26/2023 12:00 AM",
                 "endDateTime":"11/28/2023 12:00 AM",
                 "format": "%m/%d/%Y %I:%M %p"
                 }''')
         wr = Activation(id=1, name="date-time",
-                        class_name="okapi_activations.standard.weighted_random_activation.WeightedRandomActivation",
+                        class_name="novi_activations.standard.weighted_random_activation.WeightedRandomActivation",
                         config='{ "splits":[100, 0, 0], "variations":["A", "B", "C"]}')
 
         context = {
@@ -27,14 +27,14 @@ class CompositeActivationTestCase(unittest.TestCase):
 
     def test_FalseTrue(self):
         dta = Activation(id=1, name="date-time",
-                         class_name="okapi_activations.standard.date_time_activation.DateTimeActivation",
+                         class_name="novi_activations.standard.date_time_activation.DateTimeActivation",
                          config='''{
                 "startDateTime":"11/26/2023 12:00 AM",
                 "endDateTime":"11/28/2023 12:00 AM",
                 "format": "%m/%d/%Y %I:%M %p"
                 }''')
         wr = Activation(id=1, name="date-time",
-                        class_name="okapi_activations.standard.weighted_random_activation.WeightedRandomActivation",
+                        class_name="novi_activations.standard.weighted_random_activation.WeightedRandomActivation",
                         config='{ "splits":[100, 0, 0], "variations":["A", "B", "C"]}')
 
         context = {

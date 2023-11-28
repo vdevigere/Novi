@@ -1,4 +1,4 @@
-# Okapi
+# novi
 ## Table of Contents
 
 1. [Concepts](#concepts)
@@ -7,7 +7,7 @@
   4. [Tables](#tables)
   5. [Activations (Implementation and Discovery)](#activations-implementation-and-discovery)
 
-Okapi is a simple yet powerful feature flag and multivariate testing platform built in Python. Okapi is "simple" because all of its core capabilities are built around 2 simple concepts. Flags and Activations
+novi is a simple yet powerful feature flag and multivariate testing platform built in Python. novi is "simple" because all of its core capabilities are built around 2 simple concepts. Flags and Activations
 
 
 ## Concepts
@@ -27,7 +27,7 @@ In the example below the banner_ad is turned on by default, while the 50% discou
 | 2  	| 50% discount 	| false  	|
 
 ### Activations
-**Activations** determine the status of the flag. Activations can turn a flag on or off when the activation conditions are met. Activations are what make okapi a **_"dynamic"_** feature flag system. Some scenarios that Activations are useful:-
+**Activations** determine the status of the flag. Activations can turn a flag on or off when the activation conditions are met. Activations are what make novi a **_"dynamic"_** feature flag system. Some scenarios that Activations are useful:-
 - Features could be activated depending on the deployment environment such as production, development or test
 - Feature could be shown only to certain usernames and disabled for others.
 - Organizations may choose to show a feature to only traffic originating from company IP address ranges during testing
@@ -39,7 +39,7 @@ The list of scenarios can be infinitely varied and complex. An activation has fo
 - A python class name that is used to instantiate an activation object
 - A configuration
 
-Activation classes are discovered and registered with Okapi using a plugin pattern. Users are expected to provide a folder named "okapi_activations" containing modules and packages with Activation classes. Out of the box Okapi comes with 2 activations:-
+Activation classes are discovered and registered with novi using a plugin pattern. Users are expected to provide a folder named "novi_activations" containing modules and packages with Activation classes. Out of the box novi comes with 2 activations:-
 - [A Weighted Random Activation]()
 - [A Date/Time based Activation]()
 
@@ -48,33 +48,33 @@ As an example if your activation turns on/off flags for certain users, you may w
 
 | id 	 | name 	                          | class_name 	                                               | config   	                                                                                                         |
 |------|----------------------------------|--------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|
-| 1	   | A weighted random activation     | 	okapi_activations.standard.weighted_random_activation.WeightedRandomActivation  | { "splits":[100, 0, 0], "variations":["A", "B", "C"]}                                        |
-| 2	   | A date based activation          | 	okapi_activations.standard.date_time_activation.DateTimeActivation | {"startDateTime":"11/26/2023 12:00 AM","endDateTime":"11/28/2023 12:00 AM","format": "%m/%d/%Y %I:%M %p"} |
+| 1	   | A weighted random activation     | 	novi_activations.standard.weighted_random_activation.WeightedRandomActivation  | { "splits":[100, 0, 0], "variations":["A", "B", "C"]}                                        |
+| 2	   | A date based activation          | 	novi_activations.standard.date_time_activation.DateTimeActivation | {"startDateTime":"11/26/2023 12:00 AM","endDateTime":"11/28/2023 12:00 AM","format": "%m/%d/%Y %I:%M %p"} |
 
 See [Creating Activations]() for details on how to create your own custom activations.
 
 ## Architecture
 
 ### Tables
-Okapi captures the details of the above two concepts in just 3 tables: **flags**, **activations** and the association table **flags_activations**. 
+novi captures the details of the above two concepts in just 3 tables: **flags**, **activations** and the association table **flags_activations**. 
 
 The tables can be created manually using [schema.sql](schema.sql) or automatically by setting
-`createTables=False` in [okapi.ini](okapi.ini)
+`createTables=False` in [novi.ini](novi.ini)
 
 ### Components
 
-#### okapi.core
+#### novi.core
 
 The core component that implements the various model classes, the logic to discover and register activations and the logic to evaluate the final flag status, given a list of activations
 
-#### okapi.client
+#### novi.client
 
 The client component implements the BaseClient interface and two concrete client implementations that retrieve flags and activations from
 
 - Databases (DbClient)
 - Remote API endpoint (RemoteClient)
 
-#### okapi.web
+#### novi.web
 
 The web component implements a simple flask API server to implement two endpoints
 
@@ -86,7 +86,7 @@ The web component implements a simple flask API server to implement two endpoint
 
 ### Implementating Activations
 
-Okapi scans a folder by name "okapi_activations" on the python path and registers all classes inheriting from [BaseActivation](src/okapi/core/__init__.py) found within this folder.
+novi scans a folder by name "novi_activations" on the python path and registers all classes inheriting from [BaseActivation](src/novi/core/__init__.py) found within this folder.
 
 ```python
 class BaseActivation(object):
@@ -97,4 +97,4 @@ class BaseActivation(object):
     def evaluate(self, context: dict = None) -> bool:
         pass
 ```
-Okapi's power comes from being able to implement pretty much any complex logic within these activation classes. The final status of the flag is determined by ANDing each of the evaluated status
+novi's power comes from being able to implement pretty much any complex logic within these activation classes. The final status of the flag is determined by ANDing each of the evaluated status

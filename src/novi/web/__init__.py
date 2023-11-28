@@ -16,6 +16,6 @@ def create_app(test_config=None):
         # load the test config if passed in
         app.config.from_mapping(test_config)
 
-    from okapi.web import routes
+    from novi.web import routes
     app.register_blueprint(routes.blueprint)
     return app

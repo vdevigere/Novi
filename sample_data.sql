@@ -25,7 +25,7 @@ INSERT INTO activations
 			class_name,
              config)
 VALUES     ("Date Activated",
-			"okapi_activations.standard.date_time_activation.DateTimeActivation",
+			"novi_activations.standard.date_time_activation.DateTimeActivation",
             '{"startDateTime":"11/26/2023 12:00 AM","endDateTime":"11/28/2023 12:00 AM","format": "%m/%d/%Y %I:%M %p"}'
             );
 
@@ -34,7 +34,7 @@ INSERT INTO activations
 			class_name,
              config)
 VALUES     ("Random Split Activated",
-			"okapi_activations.standard.weighted_random_activation.WeightedRandomActivation",
+			"novi_activations.standard.weighted_random_activation.WeightedRandomActivation",
             '{ "splits":[100, 0, 0], "variations":["A", "B", "C"]}');
 
 -- Seed the flags_activations table

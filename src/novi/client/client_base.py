@@ -3,9 +3,9 @@ import logging
 from abc import ABC, abstractmethod
 from typing import Any
 
-from okapi.core import discovered_activations
-from okapi.core.composite_and_activation import CompositeAndActivation
-from okapi.core.models import Flag
+from novi.core import discovered_activations
+from novi.core.composite_and_activation import CompositeAndActivation
+from novi.core.models import Flag
 
 
 class BaseClient(ABC):

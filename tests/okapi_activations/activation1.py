@@ -1,4 +1,4 @@
-from okapi.core import BaseActivation
+from novi.core import BaseActivation
 
 
 class Activation1(BaseActivation):

@@ -1,7 +1,7 @@
 import json
 from datetime import datetime
 
-from okapi.core import BaseActivation
+from novi.core import BaseActivation
 
 
 class DateTimeActivation(BaseActivation):

@@ -1,9 +1,9 @@
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from okapi.client.client_base import BaseClient
-from okapi.client.database import engine
-from okapi.core.models import Flag
+from novi.client.client_base import BaseClient
+from novi.client.database import engine
+from novi.core.models import Flag
 
 
 class DbClient(BaseClient):

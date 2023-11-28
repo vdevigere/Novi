@@ -1,8 +1,8 @@
 import logging
 from typing import Dict
 
-from okapi.core import BaseActivation, discovered_activations
-from okapi.core.models import Activation
+from novi.core import BaseActivation, discovered_activations
+from novi.core.models import Activation
 
 
 class CompositeAndActivation(BaseActivation):

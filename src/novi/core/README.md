@@ -2,7 +2,7 @@
 
 ## Installation
 
-```pip install okapi```
+```pip install novi```
 
 ## Usage
 
@@ -10,11 +10,11 @@ There are a few ways to check the status of a flag and turn on/of features.
 
 ### Using DbClient
 
-DbClient retrieves feature flags from a database. okapi uses sqlalchemy to query from a variety of databases.
+DbClient retrieves feature flags from a database. novi uses sqlalchemy to query from a variety of databases.
 
 #### Configuration
 
-Before you query a database, you need to tell okapi how to connect to your database. This is done in okapi.ini.
+Before you query a database, you need to tell novi how to connect to your database. This is done in novi.ini.
 An example file is below:
 
 ```toml
@@ -61,7 +61,7 @@ Once the tables are created and seeded with your feature flag data. You can eith
 method to check the status of a feature flag using it's name. The example python file demonstrates both ways
 
 ```python
-from okapi.client.dbclient import DbClient
+from novi.client.dbclient import DbClient
 
 
 @DbClient.enabled("Feature B")
@@ -104,12 +104,12 @@ Decorator on method with no return
 
 ### Using RemoteClient
 
-okapi can also retrieve feature flags from an API endpoint. For instructions on how to setup an API server to serve
+novi can also retrieve feature flags from an API endpoint. For instructions on how to setup an API server to serve
 feature flags, see the [README](../web/README.md) under web.
 
 #### Configuration
 
-Using a remote client, requires okapi to know the url of the remote client, this is specified in okapi.ini,
+Using a remote client, requires novi to know the url of the remote client, this is specified in novi.ini,
 as illustrated in the example below
 
 ```toml
@@ -120,7 +120,7 @@ url = http://127.0.0.1:5000/flags
 Usage is similar to DbClient, instead of DbClient, you would use RemoteClient from the same package.
 
 ```python
-from okapi.client.remoteclient import RemoteClient
+from novi.client.remoteclient import RemoteClient
 
 ...
 ```
