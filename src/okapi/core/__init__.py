@@ -3,17 +3,19 @@ import pkgutil
 from importlib import import_module
 from inspect import isclass
 from typing import Any
+from abc import ABC, abstractmethod
 
 import okapi_activations
 
 logging.getLogger(__name__).addHandler(logging.NullHandler())
 
 
-class BaseActivation(object):
+class BaseActivation(ABC):
 
     def __init__(self, cfg: Any = None):
         self.config = cfg
 
+    @abstractmethod
     def evaluate(self, context: dict = None) -> bool:
         pass
 
@@ -23,8 +25,8 @@ def iter_namespace(ns_pkg):
     return pkgutil.iter_modules(ns_pkg.__path__, ns_pkg.__name__ + ".")
 
 
-def find_activations(ns_pkg) -> dict[str, type(BaseActivation)]:
-    found_activations = dict[str, type(BaseActivation)]()
+def find_activations(ns_pkg) -> dict[str, type[BaseActivation]]:
+    found_activations = dict[str, type[BaseActivation]]()
     # iterate through the modules in the current package
     for (finder, module_name, ispkg) in iter_namespace(ns_pkg):
         if ispkg:
@@ -43,4 +45,4 @@ def find_activations(ns_pkg) -> dict[str, type(BaseActivation)]:
     return found_activations
 
 
-discovered_activations: dict[str, type(BaseActivation)] = find_activations(okapi_activations)
+discovered_activations: dict[str, type[BaseActivation]] = find_activations(okapi_activations)

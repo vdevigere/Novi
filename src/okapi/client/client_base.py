@@ -1,5 +1,6 @@
 import functools
 import logging
+from abc import ABC, abstractmethod
 from typing import Any
 
 from okapi.core import discovered_activations
@@ -7,10 +8,12 @@ from okapi.core.composite_and_activation import CompositeAndActivation
 from okapi.core.models import Flag
 
 
-class BaseClient:
+class BaseClient(ABC):
+    @abstractmethod
     def get_flag_by_name(self, flag_name: str) -> Flag:
         pass
 
+    @abstractmethod
     def get_flags(self) -> list[Flag]:
         pass
 
