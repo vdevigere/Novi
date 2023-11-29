@@ -1,18 +1,11 @@
 import logging
 
-from novi.core import BaseActivation, discovered_activations
-from novi.core.models import Activation
+from novi.client.activations.base_combination_activation import BaseCombinationActivation
+from novi.core import discovered_activations, BaseActivation, register
 
 
-class CompositeAndActivation(BaseActivation):
-    """
-    Iterate through each of the activations in the list to evaluate the status, AND all statuses together
-    and return the results
-    """
-
-    def __init__(self, config: list[Activation] = None):
-        super().__init__(config)
-
+@register
+class AndActivation(BaseCombinationActivation):
     def evaluate(self, context: dict = None) -> bool:
         status = True
         for activation in self.config:

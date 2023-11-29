@@ -46,3 +46,9 @@ def find_activations(ns_pkg) -> dict[str, type[BaseActivation]]:
 
 
 discovered_activations: dict[str, type[BaseActivation]] = find_activations(novi_activations)
+
+
+def register(func):
+    logging.getLogger(__name__).debug(f"Registering activation: {func.__module__}.{func.__name__}")
+    discovered_activations[f"{func.__module__}.{func.__name__}"] = func
+    return func

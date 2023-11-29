@@ -1,9 +1,10 @@
 import json
 import random
 
-from novi.core import BaseActivation
+from novi.core import BaseActivation, register
 
 
+@register
 class WeightedRandomActivation(BaseActivation):
     def __init__(self, cfg: str = None):
         configuration = json.loads(cfg)

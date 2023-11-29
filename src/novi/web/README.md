@@ -7,7 +7,7 @@ Once your database is configured and seeded, launch the flask app using the foll
 ## Usage
 
 ```commandline
-flask --app novi.web run
+flask --app "novi.web:create_app(script='sample_data.sql')" run
 ```
 
 The web application will serve features at the following endpoints:

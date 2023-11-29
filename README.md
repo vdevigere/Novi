@@ -41,8 +41,8 @@ The list of scenarios can be infinitely varied and complex. An activation has fo
 
 Activation classes are discovered and registered with Novi using a [plugin pattern](https://packaging.python.org/en/latest/guides/creating-and-discovering-plugins/#using-namespace-packages). Users are expected to provide a folder named "novi_activations" containing modules and packages with Activation classes. An Activation class inherits from the Abstract base class [BaseActivation](src/novi/core/__init__.py).
 Out of the box novi comes with 2 activations:-
-- [A Weighted Random Activation](src/novi_activations/standard/weighted_random_activation.py)
-- [A Date/Time based Activation](src/novi_activations/standard/date_time_activation.py)
+- [A Weighted Random Activation](src/novi/client/activations/weighted_random_activation.py)
+- [A Date/Time based Activation](src/novi/client/activations/date_time_activation.py)
 
 Each activation object is passed a configuration at the time of instantiation. Configurations enable the business logic that drives activations. Think of configurations as a free-form column, containing strings (typically json) that can be parsed by the Activation class to build its internal configuration object.
 As an example if your activation turns on/off flags only if current date is between a start date and an end date, you would configure that as shown in the example below (id = 2)  

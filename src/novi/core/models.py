@@ -16,7 +16,7 @@ flags_activations = Table(
 )
 
 
-class Activation(Base):
+class ActivationModel(Base):
     __tablename__ = "activations"
 
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -25,10 +25,10 @@ class Activation(Base):
     config: Mapped[str] = mapped_column(String)
 
 
-class Flag(Base):
+class FlagModel(Base):
     __tablename__ = "flags"
 
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(30), unique=True, nullable=False)
-    activations: Mapped[List[Activation]] = relationship(secondary=flags_activations, lazy="joined")
+    activations: Mapped[List[ActivationModel]] = relationship(secondary=flags_activations, lazy="joined")
     status: Mapped[bool] = mapped_column(Boolean, default=True)

@@ -1,9 +1,10 @@
 import json
 from datetime import datetime
 
-from novi.core import BaseActivation
+from novi.core import BaseActivation, register
 
 
+@register
 class DateTimeActivation(BaseActivation):
     def __init__(self, cfg: str = None):
         configuration = json.loads(cfg)
@@ -15,8 +16,8 @@ class DateTimeActivation(BaseActivation):
 
     def evaluate(self, context: dict = None) -> bool:
         if context is not None and {'currentDateTime'} <= context.keys():
-            context['currentDateTime'] = datetime.strptime(context['currentDateTime'], self.config['format'])
-            if self.config['startDateTime'] <= context['currentDateTime'] < self.config['endDateTime']:
+            currentDateTime = datetime.strptime(context['currentDateTime'], self.config['format'])
+            if self.config['startDateTime'] <= currentDateTime < self.config['endDateTime']:
                 return True
             else:
                 return False

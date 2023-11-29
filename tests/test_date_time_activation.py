@@ -1,6 +1,6 @@
 import unittest
 
-from novi_activations.standard.date_time_activation import DateTimeActivation
+from novi.client.activations.date_time_activation import DateTimeActivation
 
 
 class DateTimeActivationTestCase(unittest.TestCase):
