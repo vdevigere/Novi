@@ -70,10 +70,7 @@ The core component that implements the various model classes, the logic to disco
 
 #### novi.client
 
-The client component implements the BaseClient interface and two concrete client implementations that retrieve flags and activations from
-
-- Databases (DbClient)
-- Remote API endpoint (RemoteClient)
+The client component uses SQLAlchemy to retrieve the flags from any supported relational database.
 
 #### novi.web
 
@@ -82,7 +79,7 @@ The web component implements a simple flask API server to implement two endpoint
 - `/flags` - Retrieve all flags
 - `/flags/<flag_name>` - Retrieve a specific flag by name
 
-- The web component relies on the DbClient to fetch the flags from a database and expose them via the the `/flags`  resource endpoint
+- The web component relies on the `novi.client` to fetch the flags from a database and expose them via the the `/flags`  resource endpoint
 
 
 ### Implementating Activations

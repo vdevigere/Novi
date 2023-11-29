@@ -1,5 +1,4 @@
 import logging
-from typing import Dict
 
 from novi.core import BaseActivation, discovered_activations
 from novi.core.models import Activation
@@ -14,7 +13,7 @@ class CompositeAndActivation(BaseActivation):
     def __init__(self, config: list[Activation] = None):
         super().__init__(config)
 
-    def evaluate(self, context: Dict = None) -> bool:
+    def evaluate(self, context: dict = None) -> bool:
         status = True
         for activation in self.config:
             if activation.class_name in discovered_activations:

@@ -13,7 +13,7 @@ class WeightedRandomActivation(BaseActivation):
             super().__init__(configuration)
 
     def evaluate(self, context: dict = None) -> bool:
-        if {'seed', 'variant'} <= context.keys():
+        if context is not None and {'seed', 'variant'} <= context.keys():
             random.seed(context.get('seed'))
             choice = random.choices(self.config['variations'], weights=self.config['splits'])
             return choice[0] == context.get('variant')

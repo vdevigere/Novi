@@ -1,20 +1,23 @@
 import dataclasses
+import json
 
-from flask import Blueprint
+from flask import Blueprint, request
 
-from novi.client.dbclient import DbClient
+from novi.client import flag
 from novi.core.models import Flag
 
 blueprint = Blueprint("flags", __name__)
 
 
-@blueprint.route("/flags")
+@blueprint.route("/flags", methods=['POST'])
 def all_flags() -> list[Flag]:
-    flags = DbClient().get_flags()
-    return flags
+    evaluate = request.args.get('evaluate', default=True, type=json.loads)
+    context = request.get_json(silent=True)
+    return flag.get_flags(context, evaluate=evaluate)
 
 
-@blueprint.route("/flags/<flag_name>")
+@blueprint.route("/flags/<flag_name>", methods=['POST'])
 def flags_by_name(flag_name: str) -> dict:
-    flag: Flag = DbClient().get_flag_by_name(flag_name)
-    return dataclasses.asdict(flag)
+    evaluate = request.args.get('evaluate', default=True, type=json.loads)
+    context = request.get_json(silent=True)
+    return dataclasses.asdict(flag.get_flag_by_name(flag_name, context=context, evaluate=evaluate))

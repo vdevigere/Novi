@@ -14,7 +14,7 @@ class DateTimeActivation(BaseActivation):
             super().__init__(configuration)
 
     def evaluate(self, context: dict = None) -> bool:
-        if {'currentDateTime'} <= context.keys():
+        if context is not None and {'currentDateTime'} <= context.keys():
             context['currentDateTime'] = datetime.strptime(context['currentDateTime'], self.config['format'])
             if self.config['startDateTime'] <= context['currentDateTime'] < self.config['endDateTime']:
                 return True
