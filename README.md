@@ -154,8 +154,8 @@ databases.
 #### Configuration
 
 Before you query a database, you need to tell Novi how to connect to your database. This is done in novi.ini.
-An example file is [here](../../../novi.ini). To create the tables you can either run the DDL SQL from the
-file [schema.sql](../../../schema.sql) or use the `novi.web`. Instructions to create and seed the table using the [sample_data.sql](sample_data.sql)
+An example file is [here](novi.ini). To create the tables you can either run the DDL SQL from the
+file [schema.sql](schema.sql) or use the `novi.web`. Instructions to create and seed the table using the [sample_data.sql](sample_data.sql)
 script are [here](src/novi/web/README.md).
 
 Once the tables are created and seeded with your feature flag data. You can either use the decorator or the is_enabled
