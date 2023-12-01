@@ -135,3 +135,85 @@ class BaseCombinationActivation(BaseActivation):
 This approach gives implementers more fine grained ability to control how the final status of the flag is calculated.
 Rows 3 and 4 in the Activation table shown above are an example of ComboActivations, the configuration column is a list of activations that need to be combined
 They activations can be combined using any custom logic implemented in the `def evaluate(..)` method
+
+# Installation and Usage
+
+## Installation
+
+```pip install novi```
+
+## Usage
+
+There are a few ways to check the status of a flag and turn on/of features.
+
+### Using novi.client
+
+The `novi.client.flag` retrieves feature flags from a database. Novi uses sqlalchemy to query from a variety of
+databases.
+
+#### Configuration
+
+Before you query a database, you need to tell Novi how to connect to your database. This is done in novi.ini.
+An example file is [here](../../../novi.ini). To create the tables you can either run the DDL SQL from the
+file [schema.sql](../../../schema.sql) or use the `novi.web`. Instructions to create and seed the table using the [sample_data.sql](sample_data.sql)
+script are [here](src/novi/web/README.md).
+
+Once the tables are created and seeded with your feature flag data. You can either use the decorator or the is_enabled
+method to check the status of a feature flag using it's name. The example python file demonstrates both ways
+
+```python
+import logging.config
+from novi.client import flag
+
+dateToTest = "11/26/2023 12:00 AM"
+
+
+@flag.enabled("Date Activated Feature", {
+    'currentDateTime': dateToTest
+})
+def date_based_activated_func():
+    print(f"Feature active as of {dateToTest}")
+
+
+# Only the variationA will be evaluated as the split is [100,0, 0] in the database
+#
+@flag.enabled("Random Variant Feature", {
+    "seed": 333,
+    "variant": "A"
+})
+def variationA():
+    print('variation A')
+
+
+@flag.enabled("Random Variant Feature", {
+    "seed": 333,
+    "variant": "B"
+})
+def variationB():
+    print('variation B')
+
+
+def variationC():
+    print('variation C')
+
+
+if __name__ == '__main__':
+    logging.config.fileConfig("logging.conf")
+    date_based_activated_func()
+    variationA()
+    variationB()
+    if flag.is_enabled("Random Variant Feature", {
+        "seed": 333,
+        "variant": "C"
+    }):
+        variationC()
+```
+
+Given the sample tables as shown above
+
+The output will be
+
+```commandline
+Feature active as of 11/26/2023 12:00 AM
+variation A
+```
