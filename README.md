@@ -217,3 +217,13 @@ The output will be
 Feature active as of 11/26/2023 12:00 AM
 variation A
 ```
+### Using API endpoints
+`novi.web` exposes 4 endpoints. 
+- The `\flags` and `\flags\<flag_name>` endpoints return the raw flag data as retrieved
+from the database table. The status of the flag is not updated. These endpoints are useful if you are integrating with an 
+authoring tool, so as to allow users to view\edit the flag data as persisted in the database. These endpoints are restful and support
+GET, POST, PUT and DELETE http methods
+- The `\evaluatedFlags` and `\evaluatedFlags\<flag_name>` endpoints do the actual evaluation of the status flag
+by applying the context against each of the activations associated with the flag. The context is passed as part of the request
+body in the POST request. See [novi.web](src/novi/web/README.md) for details
+
