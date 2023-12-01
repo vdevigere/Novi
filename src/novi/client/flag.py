@@ -4,19 +4,16 @@ import logging
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from novi.client.activations.composite_and_activation import CompositeAndActivation
+from novi.client.activations import activation_util
 from novi.client.database import engine
-from novi.core import discovered_activations
 from novi.core.models import FlagModel, ActivationModel
 
 
 def evaluate_flag(flag: FlagModel, context: dict) -> FlagModel:
     if flag is not None:
         logging.getLogger(__name__).debug(f"Flag Name: {flag.name}, Status: {flag.status}")
-        logging.getLogger(__name__).debug(f"Discovered Activations: {discovered_activations}")
         logging.getLogger(__name__).debug(f"Associated Activations: {flag.activations}")
-        flag.status = flag.status and CompositeAndActivation(flag.activations).evaluate(context)
-        logging.getLogger(__name__).debug(f"CompositeAndActivation = {flag.status}")
+        flag.status = flag.status and activation_util.and_all_activations(flag.activations, context)
     return flag
 
 
