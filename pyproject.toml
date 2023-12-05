@@ -1,15 +1,14 @@
 [tool.poetry]
 name = "novi"
-version = "0.4.1"
+version = "0.4.2"
 description = "A simple yet powerful feature flag and multivariate testing platform built in Python"
 authors = ["vdevigere <vdevigere+git@gmail.com>"]
 readme = "README.md"
 packages = [
     {include = "novi", from="src"},
+    {include = "novi_activations", from="src"},
 ]
-include=[
-   {path = "src/novi_activations"},
-]
+
 license="GPL-3.0-only"
 homepage="https://github.com/vdevigere/Novi"
 repository="https://github.com/vdevigere/Novi"
